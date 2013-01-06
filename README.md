@@ -6,7 +6,7 @@
 例如将syslog通过5678端口广播，可以通过以下命令
 
 ```sh
-$ tail -f /var/log/syslog | zmqcat "tcp://*:5678"
+$ tail -F /var/log/syslog | zmqcat "tcp://*:5678"
 ```
 
 然后再写一个接收程序处理这些信息。下面示例的python程序简单地将收到的信息输出。
@@ -31,7 +31,7 @@ while True:
 
 ```sh
 $ mkfifo xdebug.fifo
-$ tail -f xdebug.fifo | zmqcat
+$ tail -F xdebug.fifo | zmqcat
 ```
 
 注意：当没有进程读取这个FIFO文件时，xdebug的日志写入操作将被block。
